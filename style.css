@@ -1,0 +1,53 @@
+body{
+	background-color: lightgreen;
+}
+
+.background    { background: white;
+                 table-layout: fixed;
+                 border-spacing: 0;   }
+.background td { padding: 0;          }
+.lava          { background: rgb(255, 100, 100); }
+.wall          { background: #777777;   }
+
+.actor  { position: absolute;  }
+.coin   { background: rgb(241, 229, 89); }
+.player { background-image: url("fathy.png");
+		  background-repeat: no-repeat; }
+
+.game {
+  overflow: hidden;
+  max-width: 600px;
+  max-height: 450px;
+  position: relative;
+  margin: auto;
+  border-style: solid;
+  border-width: 5px;
+  border-color: black;
+}
+
+.lost .player {
+  background-image: url("lavaFathy.png");
+}
+.won .player {
+  box-shadow: -4px -7px 20px lightgreen, 4px -7px 20px lightgreen;
+}
+
+h1{
+	font-family: 'Anton', sans-serif;
+}
+footer{
+	width: 200px;
+	height: 30px;
+	margin-bottom: 0px;
+	background-color: black;
+}
+#foot{
+	color : white;
+	font-size: 20px;
+	font-family: 'Lobster', cursive;
+}
+#end{
+	display: none;
+	font-family: 'Courgette', cursive;
+	font-size: 30px;
+}

@@ -6,11 +6,11 @@ body{
                  table-layout: fixed;
                  border-spacing: 0;   }
 .background td { padding: 0;          }
-.lava          { background: rgb(255, 100, 100); }
+.lava          { background: rgb(255, 100, 100);}
 .wall          { background: #777777;   }
 
 .actor  { position: absolute;  }
-.coin   { background: rgb(241, 229, 89); }
+.coin   { background: rgb(241, 229, 89); border-: 7px; }
 .player { background-image: url("fathy.png");
 		  background-repeat: no-repeat; }
 

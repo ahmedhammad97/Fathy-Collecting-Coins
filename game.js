@@ -272,6 +272,9 @@ Player.prototype.act = function(step, level, keys) {
   if (level.status == "lost") {
     this.pos.y += step;
     this.size.y -= step;
+    playerXSpeed=0;
+    jumpSpeed=0;
+
   }
 };
 
@@ -341,16 +344,18 @@ function runLevel(level, Display, andThen) {
 
 function runGame(plans, Display) {
   function startLevel(n) {
+    jumpSpeed=17;
+    playerXSpeed=7;
     runLevel(new Level(plans[n]), Display, function(status) {
       if (status == "lost")
         startLevel(n);
       else if (n < plans.length - 1)
         startLevel(n + 1);
-      else
-        var g = document.getElementsByClassName("background");
-    	g.style.display = none;
-    	var e = document.getElementsById("end");
-    	end.style.display = "block";
+        
+      else{
+        console.log("hey");
+        document.getElementById("end").style.display = "block";}
+    	 
     });
   }
   startLevel(0);

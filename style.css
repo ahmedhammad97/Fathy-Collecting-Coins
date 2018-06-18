@@ -6,11 +6,11 @@ body{
                  table-layout: fixed;
                  border-spacing: 0;   }
 .background td { padding: 0;          }
-.lava          { background: rgb(255, 100, 100);}
-.wall          { background: #777777;   }
+.lava          { background-image: url("lava.png"); background-repeat: no-repeat;}
+.wall          { background-image: url("wall.png"); background-repeat: no-repeat; }
 
 .actor  { position: absolute;  }
-.coin   { background: rgb(241, 229, 89); border-: 7px; border-radius: 20px;}
+.coin   { background-image: url("coin.png");}
 .player { background-image: url("fathy.png");
 		  background-repeat: no-repeat; }
 
@@ -34,6 +34,12 @@ body{
 
 h1{
 	font-family: 'Anton', sans-serif;
+}
+#subtitle{
+	font-family: Courgette;
+	font-size: 15px;
+	color: black;
+	font-style: italic;
 }
 footer{
 	width: 200px;

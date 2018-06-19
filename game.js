@@ -5,22 +5,22 @@ if(window.innerWidth<800){
 //Load Images
 function loadImages(){
 	let wImage = new Image();
-	wImage.src = 'wall.png';
+	wImage.src = 'imgs/wall.png';
 
 	let lImage = new Image();
-	lImage.src = 'lava.png';
+	lImage.src = 'imgs/lava.png';
 
 	let loseImage = new Image();
 	loseImage.src = 'fathyAsh.png';
 
 	let cImage = new Image();
-	cImage.src = 'coin.png';
+	cImage.src = 'imgs/coin.png';
 
 	let mrImage = new Image();
-	mrImage.src = 'monsterRight.png';
+	mrImage.src = 'imgs/monsterRight.png';
 
 	let mlImage = new Image();
-	mlImage.src = 'monsterLeft.png';
+	mlImage.src = 'imgs/monsterLeft.png';
 }
 
 //Controllers
@@ -188,8 +188,8 @@ function drawActors(actors) {
     rect.style.left = `${actor.pos.x * scale}px`;
     rect.style.top = `${actor.pos.y * scale}px`;
 		if(actor.type == "monster"){
-			if(actor.right){rect.style.backgroundImage = "url('monsterRight.png')";}
-			else{rect.style.backgroundImage = "url('monsterLeft.png')";}
+			if(actor.right){rect.style.backgroundImage = "url('imgs/monsterRight.png')";}
+			else{rect.style.backgroundImage = "url('imgs/monsterLeft.png')";}
 		}
     return rect;
   }));

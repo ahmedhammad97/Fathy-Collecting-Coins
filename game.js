@@ -11,7 +11,16 @@ function loadImages(){
 	lImage.src = 'lava.png';
 
 	let loseImage = new Image();
-	loseImage.src = 'lavaFathy.png';
+	loseImage.src = 'fathyAsh.png';
+
+	let cImage = new Image();
+	cImage.src = 'coin.png';
+
+	let mrImage = new Image();
+	mrImage.src = 'monsterRight.png';
+
+	let mlImage = new Image();
+	mlImage.src = 'monsterLeft.png';
 }
 
 //Controllers
@@ -277,7 +286,7 @@ Lava.prototype.collide = function(state) {
 
 
 Monster.prototype.collide = function(state) {
-	if(state.player.pos.y + state.player.size.y < this.pos.y + 0.4){
+	if(state.player.pos.y + state.player.size.y < this.pos.y + 0.3){
 		let filtered = state.actors.filter(a => a != this);
 		return new State(state.level, filtered, state.status )
 	}
@@ -386,9 +395,13 @@ function runLevel(level, Display) {
       if (state.status == "playing") {
         return true;
       } else if (ending > 0) {
+				playerXSpeed = 0;
+				jumpSpeed = 0;
         ending -= time;
         return true;
       } else {
+				playerXSpeed = 10;
+				jumpSpeed = 18;
         display.clear();
         resolve(state.status);
         return false;

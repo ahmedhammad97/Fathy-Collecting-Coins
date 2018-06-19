@@ -9,14 +9,31 @@
 	<script type="text/javascript" src="game.js"></script>
 </head>
 <body>
+	<div id="start">
+		<center>
+			<br>
+			<h1>Fathy's collecting coins<span id=subtitle>Version 2</span></h1>
+			<p>Use keyboard arrows to move/jump</p><br>
+			<p>Use ESC button to Pause/Continue</p><br>
+			<p>Collect all coins to win</p><br>
+			<p>Avoid hitting lava or monsters</p><br>
+			<p>You can kill a monster by jumping over it</p><br><br>
+			<p id="enter">Press Enter to Start the game</p>
+		</center>
+	</div>
 	<br><center><h1>Fathy's collecting coins<span id=subtitle>  Version 2</span></h1></center>
 	<center><footer><span id="foot">Coded by: A.Hammad</span></footer></center>
 	<center><img src="end.jpg" id="end"></center>
 
-<script type="text/javascript">
-	loadImages();
-	runGame(GAME_LEVELS,DOMDisplay);
-</script>
+	<script type="text/javascript" src="start.js"></script>
 
 </body>
 </html>
+
+<!--
+	How to play:
+	- use keyboard arrows to move/jump, ESC to pause/continue
+	- Collect all coins to win
+	- Avoid hitting lava or monsters
+	- You can kill a monster by jumping over it
+-->

@@ -67,6 +67,17 @@ h1{
 	color : lightgreen;
 	font-size: 35px;
 }
+
+#pause{
+	background-color: black;
+	opacity: 0.6;
+	display: none;
+	color: white;
+	font-size: 20px;
+	font-family: Anton;
+	width: 100%;
+}
+
 footer{
 	width: 200px;
 	height: 30px;

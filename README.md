@@ -1,4 +1,4 @@
-![Screenshot](https://github.com/ahmedhammad97/FathyCollectingCoins/blob/master/imgs/wallpaper.png)
+![Screenshot](https://github.com/ahmedhammad97/FathyCollectingCoins/blob/master/imgs/Wallpaper.png)
 
 A Javascript level progression game with hero named "Fathy".
 The game has a static objects for the map (Walls, static lava), in addition to dynamic actors (Player, coins, monsters, dynamic lava).

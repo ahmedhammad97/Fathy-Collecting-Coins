@@ -110,6 +110,21 @@ class Coin{
 Coin.prototype.size = new Vec(0.6,0.6);
 
 
+class Monster{
+	constructor(pos,speed,direction){
+		this.pos = pos;
+		this.speed = speed;
+		this.right=direction;
+		if(direction==undefined || direction==null){this.right = true;}
+	}
+	get type(){return "monster";}
+	static create(pos){
+		return new Monster(pos,new Vec(2+(Math.floor(Math.random()*3)),0));
+	}
+}
+Monster.prototype.size = new Vec(1,1);
+
+
 const levelChars = {
 	"." : "empty",
 	"#" : "wall",
@@ -118,7 +133,8 @@ const levelChars = {
 	"o" : Coin,
 	"=" : Lava,
 	"|" : Lava,
-	"v" : Lava
+	"v" : Lava,
+	"M" : Monster
 };
 
 //Helper function .. creates HTML elemets
@@ -162,6 +178,10 @@ function drawActors(actors) {
     rect.style.height = `${actor.size.y * scale}px`;
     rect.style.left = `${actor.pos.x * scale}px`;
     rect.style.top = `${actor.pos.y * scale}px`;
+		if(actor.type == "monster"){
+			if(actor.right){rect.style.backgroundImage = "url('monsterRight.png')";}
+			else{rect.style.backgroundImage = "url('monsterLeft.png')";}
+		}
     return rect;
   }));
 }
@@ -201,7 +221,6 @@ DOMDisplay.prototype.scrollPlayerIntoView = function(state) {
 };
 
 
-
 Level.prototype.touches = function(pos, size, type) {
   var xStart = Math.floor(pos.x);
   var xEnd = Math.ceil(pos.x + size.x);
@@ -231,6 +250,9 @@ State.prototype.update = function(time, keys) {
   if (this.level.touches(player.pos, player.size, "lava")) {
     return new State(this.level, actors, "lost");
   }
+	if (this.level.touches(player.pos, player.size, "monster")) {
+    return new State(this.level, actors, "lost");
+  }
 
   for (let actor of actors) {
     if (actor != player && overlap(actor, player)) {
@@ -254,6 +276,15 @@ Lava.prototype.collide = function(state) {
 };
 
 
+Monster.prototype.collide = function(state) {
+	if(state.player.pos.y + state.player.size.y < this.pos.y + 0.4){
+		let filtered = state.actors.filter(a => a != this);
+		return new State(state.level, filtered, state.status )
+	}
+  return new State(state.level, state.actors, "lost");
+};
+
+
 Coin.prototype.collide = function(state) {
   let filtered = state.actors.filter(a => a != this);
   let status = state.status;
@@ -270,6 +301,16 @@ Lava.prototype.update = function(time, state) {
     return new Lava(this.reset, this.speed, this.reset);
   } else {
     return new Lava(this.pos, this.speed.times(-1));
+  }
+};
+
+
+Monster.prototype.update = function(time,state) {
+	let newPos = this.pos.plus(this.speed.times(time));
+  if (!state.level.touches(newPos, this.size, "wall")) {
+    return new Monster(newPos, this.speed, this.right);
+  } else {
+    return new Monster(this.pos, this.speed.times(-1), !this.right);
   }
 };
 
@@ -318,7 +359,7 @@ function trackKeys(keys) {
 }
 
 const arrowKeys =
-  trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp"]);
+  trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", ]);
 
 
 function runAnimation(frameFunc) {
@@ -337,7 +378,7 @@ function runAnimation(frameFunc) {
 function runLevel(level, Display) {
   let display = new Display(document.body, level);
   let state = State.start(level);
-  let ending = 1;
+  let ending = 0.4;
   return new Promise(resolve => {
     runAnimation(time => {
       state = state.update(time, arrowKeys);

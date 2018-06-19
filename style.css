@@ -10,14 +10,16 @@ body{
 .wall          { background-image: url("wall.png"); background-repeat: no-repeat; }
 
 .actor  { position: absolute;  }
-.coin   { background-image: url("coin.png");}
+.coin   { background-image: url("coin.png"); border-radius: 20px;}
 .player { background-image: url("fathy.png");
 		  background-repeat: no-repeat; }
 
+.monster{ background-image: url("monsterRight.png"); background-repeat: no-repeat;}
+.flipMonster{ background-image: url("monsterLeft.png"); background-repeat: no-repeat;}
 .game {
   overflow: hidden;
-  max-width: 600px;
-  max-height: 450px;
+  max-width: 720px;
+  max-height: 540px;
   position: relative;
   margin: auto;
   border-style: solid;

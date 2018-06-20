@@ -1,4 +1,4 @@
-![Screenshot](https://github.com/ahmedhammad97/FathyCollectingCoins/blob/master/fathy.JPG)
+![Screenshot](https://github.com/ahmedhammad97/FathyCollectingCoins/blob/master/imgs/Wallpaper.png)
 A Javascript level progression game. The hero of the game is Fathy.
 It consist of 6 levels .. each built as string array to form a matrix.
 The player wins a level when he collects all the coins.

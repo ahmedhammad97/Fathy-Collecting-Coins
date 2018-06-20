@@ -24,7 +24,7 @@ function loadImages(){
 }
 
 function playSound(file){
-	var cAudio = new Audio("music/" + file);
+	var cAudio = new Audio("https://fathycoins.000webhostapp.com/music/" + file);
 	cAudio.play();
 }
 

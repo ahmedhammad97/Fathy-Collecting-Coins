@@ -23,6 +23,11 @@ function loadImages(){
 	mlImage.src = 'imgs/monsterLeft.png';
 }
 
+function playSound(file){
+	var cAudio = new Audio("music/" + file);
+	cAudio.play();
+}
+
 //Controllers
 var playerXSpeed = 10;
 var gravity = 30;
@@ -258,9 +263,11 @@ State.prototype.update = function(time, keys) {
 
   let player = newState.player;
   if (this.level.touches(player.pos, player.size, "lava")) {
+		playSound("lose.mp3");
     return new State(this.level, actors, "lost");
   }
 	if (this.level.touches(player.pos, player.size, "monster")) {
+		playSound("lose.mp3");
     return new State(this.level, actors, "lost");
   }
 
@@ -282,23 +289,30 @@ function overlap(actor1, actor2) {
 
 
 Lava.prototype.collide = function(state) {
+	playSound("lose.mp3");
   return new State(state.level, state.actors, "lost");
 };
 
 
 Monster.prototype.collide = function(state) {
 	if(state.player.pos.y + state.player.size.y < this.pos.y + 0.3){
+		playSound("coin.mp3");
 		let filtered = state.actors.filter(a => a != this);
 		return new State(state.level, filtered, state.status )
 	}
+	playSound("lose.mp3");
   return new State(state.level, state.actors, "lost");
 };
 
 
 Coin.prototype.collide = function(state) {
+	playSound("coin.mp3");
   let filtered = state.actors.filter(a => a != this);
   let status = state.status;
-  if (!filtered.some(a => a.type == "coin")) status = "won";
+  if (!filtered.some(a => a.type == "coin")) {
+		status = "won";
+		playSound("win.mp3");
+	}
   return new State(state.level, filtered, status);
 };
 
@@ -392,7 +406,7 @@ function runAnimation(frameFunc) {
 function runLevel(level, Display) {
   let display = new Display(document.body, level);
   let state = State.start(level);
-  let ending = 0.4;
+  let ending = 0.6;
 	let running = "yes";
   return new Promise(resolve => {
 

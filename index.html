@@ -2,11 +2,9 @@
 <html>
 <head>
 	<title>Fathy's Game</title>
-	<link rel="short icon" href="fathy.ico" />
+	<link rel="short icon" href="imgs/fathy.ico" />
 	<link href="https://fonts.googleapis.com/css?family=Anton|Courgette|Lobster" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script type="text/javascript" src="levels.js"></script>
-	<script type="text/javascript" src="game.js"></script>
 </head>
 <body>
 	<div id="start">
@@ -20,16 +18,25 @@
 			<p id="enter">Press Enter to Start the game</p>
 		</center>
 	</div>
+
 	<center><h1>Fathy's collecting coins<span id=subtitle>  Version 2</span></h1></center>
+
 	<center><footer><span id="foot">Coded by: A.Hammad</span></footer></center>
-	<center><img src="end.jpg" id="end"></center>
+
+	<center><div id="scoreBoard">
+		<span>Time : <span id="time">0</span></span>
+		<span>&nbsp;&nbsp;Score : <span id="score">0</span> </span>
+	</div></center>
+
+	<center><img src="imgs/end.jpg" id="end"></center>
 
 	<div id="pause">
 		<center>
 			<h2>Press ESC again to continue</h2>
 		</center>
 	</div>
-
+	<script type="text/javascript" src="levels.js"></script>
+	<script type="text/javascript" src="game.js"></script>
 	<script type="text/javascript" src="start.js"></script>
 
 </body>

@@ -1,4 +1,4 @@
-loadImages();
+//loadImages();
 
 var run=false;
 

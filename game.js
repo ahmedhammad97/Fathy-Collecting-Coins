@@ -23,6 +23,26 @@ function loadImages(){
 	mlImage.src = 'imgs/monsterLeft.png';
 }
 
+function playSound(file){
+	var cAudio = new Audio("music/" + file);
+	cAudio.play();
+}
+
+class Clock{
+	constructor(display){
+		this.display = display;
+		this.btn = null;
+	}
+	start(){
+		this.btn = setInterval(()=>{
+			this.display.innerText = +(this.display.innerText) + 1;
+		},1000);
+	}
+	stop(){
+		clearInterval(this.btn);
+	}
+}
+
 //Controllers
 var playerXSpeed = 10;
 var gravity = 30;
@@ -30,6 +50,10 @@ var jumpSpeed = 18;
 var wobbleSpeed = 10;
 var wobbleDist = 0.1;
 var scale = 20;
+
+var time = document.getElementById('time');
+var score = document.getElementById('score');
+
 
 
 class Level{
@@ -258,9 +282,12 @@ State.prototype.update = function(time, keys) {
 
   let player = newState.player;
   if (this.level.touches(player.pos, player.size, "lava")) {
+		playSound("lose.mp3");
+		score.innerText = Math.max( +(score.innerText) - 15 , 0);
     return new State(this.level, actors, "lost");
   }
 	if (this.level.touches(player.pos, player.size, "monster")) {
+		playSound("lose.mp3");
     return new State(this.level, actors, "lost");
   }
 
@@ -282,23 +309,35 @@ function overlap(actor1, actor2) {
 
 
 Lava.prototype.collide = function(state) {
+	playSound("lose.mp3");
+	score.innerText = Math.max( +(score.innerText) - 15 , 0);
   return new State(state.level, state.actors, "lost");
 };
 
 
 Monster.prototype.collide = function(state) {
 	if(state.player.pos.y + state.player.size.y < this.pos.y + 0.3){
+		playSound("coin.mp3");
+		score.innerText = +(score.innerText) + 5;
 		let filtered = state.actors.filter(a => a != this);
 		return new State(state.level, filtered, state.status )
 	}
+	playSound("lose.mp3");
+	score.innerText = Math.max( +(score.innerText) - 15 , 0);
   return new State(state.level, state.actors, "lost");
 };
 
 
 Coin.prototype.collide = function(state) {
+	playSound("coin.mp3");
+	score.innerText = +(score.innerText) + 1;
   let filtered = state.actors.filter(a => a != this);
   let status = state.status;
-  if (!filtered.some(a => a.type == "coin")) status = "won";
+  if (!filtered.some(a => a.type == "coin")) {
+		status = "won";
+		playSound("win.mp3");
+		score.innerText = +(score.innerText) + 10;
+	}
   return new State(state.level, filtered, status);
 };
 
@@ -389,10 +428,10 @@ function runAnimation(frameFunc) {
   requestAnimationFrame(frame);
 }
 
-function runLevel(level, Display) {
+function runLevel(level, Display, clock) {
   let display = new Display(document.body, level);
   let state = State.start(level);
-  let ending = 0.4;
+  let ending = 0.6;
 	let running = "yes";
   return new Promise(resolve => {
 
@@ -402,15 +441,18 @@ function runLevel(level, Display) {
         if (running == "no") {
           running = "yes";
 					document.getElementById('pause').style.display = 'none';
+					clock.start();
           runAnimation(frame);
         } else if (running == "yes") {
           running = "pausing";
 					let banner = document.getElementById('pause');
 					document.body.appendChild(banner);
 					banner.style.display = 'block';
+					clock.stop();
         } else {
           running = "yes";
 					document.getElementById('pause').style.display = 'none';
+					clock.start();
         }
       }
       window.addEventListener("keydown", escHandler);
@@ -443,10 +485,15 @@ function runLevel(level, Display) {
 }
 
 async function runGame(plans, Display) {
+	var clock = new Clock(time);
+	clock.start();
   for (let level = 0; level < plans.length;) {
     let status = await runLevel(new Level(plans[level]),
-                                Display);
+                                Display, clock);
     if (status == "won") level++;
   }
+	clock.stop();
+	document.getElementById('scoreBoard').innerText = "Your total score : " + Math.floor(+(score.innerText) * +1000/(time.innerText));
+	document.getElementById('scoreBoard').style.maxWidth = "600px";
   document.getElementById('end').style.display = "block";
 }

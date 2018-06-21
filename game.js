@@ -53,6 +53,7 @@ var scale = 20;
 
 var time = document.getElementById('time');
 var score = document.getElementById('score');
+var coinsLeft = document.getElementById('coinsLeft');
 
 
 
@@ -333,6 +334,7 @@ Coin.prototype.collide = function(state) {
 	score.innerText = +(score.innerText) + 1;
   let filtered = state.actors.filter(a => a != this);
   let status = state.status;
+	coinsLeft.innerText = filtered.filter(a => a.type == "coin").length;
   if (!filtered.some(a => a.type == "coin")) {
 		status = "won";
 		playSound("win.mp3");
@@ -433,6 +435,7 @@ function runLevel(level, Display, clock) {
   let state = State.start(level);
   let ending = 0.6;
 	let running = "yes";
+	coinsLeft.innerText = level.startActors.filter(a => a.type == "coin").length;
   return new Promise(resolve => {
 
 		function escHandler(event,display) {
@@ -451,8 +454,6 @@ function runLevel(level, Display, clock) {
 					clock.stop();
         } else {
           running = "yes";
-					document.getElementById('pause').style.display = 'none';
-					clock.start();
         }
       }
       window.addEventListener("keydown", escHandler);

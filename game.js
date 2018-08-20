@@ -2,27 +2,6 @@ if(window.innerWidth<800){
 	alert("Sorry, the game is only supported for PCs and laptops :(");
 }
 
-//Load Images
-function loadImages(){
-	let wImage = new Image();
-	wImage.src = 'imgs/wall.png';
-
-	let lImage = new Image();
-	lImage.src = 'imgs/lava.png';
-
-	let loseImage = new Image();
-	loseImage.src = 'fathyAsh.png';
-
-	let cImage = new Image();
-	cImage.src = 'imgs/coin.png';
-
-	let mrImage = new Image();
-	mrImage.src = 'imgs/monsterRight.png';
-
-	let mlImage = new Image();
-	mlImage.src = 'imgs/monsterLeft.png';
-}
-
 function playSound(file){
 	var cAudio = new Audio("https://fathycoins.000webhostapp.com/music/" + file);
 	cAudio.play();
@@ -443,12 +422,12 @@ function runLevel(level, Display, clock) {
         event.preventDefault();
         if (running == "no") {
           running = "yes";
-					document.getElementById('pause').style.display = 'none';
+					document.getElementById('start').style.display = 'none';
 					clock.start();
           runAnimation(frame);
         } else if (running == "yes") {
           running = "pausing";
-					let banner = document.getElementById('pause');
+					let banner = document.getElementById('start');
 					document.body.appendChild(banner);
 					banner.style.display = 'block';
 					clock.stop();

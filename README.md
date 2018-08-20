@@ -17,6 +17,7 @@ Finally, when the player loses, the level restarted, and the next level is loade
 - Ability to pause the game.
 - Sound effects for many actions.
 - Five well designed level maps.
+- Different speed for each monster.
 
 
 ## Screenshots:

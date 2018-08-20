@@ -1,24 +1,17 @@
-![Screenshot](https://github.com/ahmedhammad97/FathyCollectingCoins/blob/master/fathy.JPG)
-A Javascript level progression game. The hero of the game is Fathy.
-It consist of 6 levels .. each built as string array to form a matrix.
-The player wins a level when he collects all the coins.
-The player loses when he hits a lava cell or fall out of the grid.
+![Screenshot](https://github.com/ahmedhammad97/FathyCollectingCoins/blob/master/imgs/Wallpaper.png)
 
-A function that reads the matrix and convert to either static or dynamic objects is called Level.
-The function that displays the game build a table of cells, either a space,lava,wall if static.
-And whether a player,moving lava,coins if moving.
+### A Javascript level progression game with hero named "Fathy".
 
-A function Vector kept to give x and y coordinates for every element.
-And a track of their places is set in an arrays called Grid and Actors.
+- The game has a static objects for the map (Walls, static lava), in addition to dynamic actors (Player, coins, monsters, dynamic lava).
 
-Drawing the game used a functions drawBackground,drawActors and drawFrame to display continous changes.
-Also function set to keep the player almost in the middle of the game always by shifting all other elements.
+- The player wins a level when he collects all the coins. The player loses when he hits a lava cell or a monster. 
 
-Motion is logged in by key presses. Horizontal and vertical motion of player was seperated to allow them work together.
-Any other moving object has an act function to specify it's motion as needed.
+- Monsters can be killed by jumping over them. 
 
-Collision is known when 2 cells have the same Vector "pos".
+- The user can pause the game at any time. 
 
-The game is similar to a game project in "Eloquent Javascript" Book.
+- Audio effects plays when player collects a coin, kill a monster, win or lose the game.
 
-Update 1: Forcing the player to freeze when he loses by simply setting the x speed and jumping speed both to zero.
+- A score board which shows score and time observes every update.
+
+- Game plans and idea were copied from "Eloquent Javascript" book.

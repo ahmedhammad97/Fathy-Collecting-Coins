@@ -22,25 +22,6 @@ class Clock{
 	}
 }
 
-function playSound(file){
-	var cAudio = new Audio("https://fathycoins.000webhostapp.com/music/" + file);
-	cAudio.play();
-}
-
-class Clock{
-	constructor(display){
-		this.display = display;
-		this.btn = null;
-	}
-	start(){
-		this.btn = setInterval(()=>{
-			this.display.innerText = +(this.display.innerText) + 1;
-		},1000);
-	}
-	stop(){
-		clearInterval(this.btn);
-	}
-}
 
 //Controllers
 var playerXSpeed = 10;

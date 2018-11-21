@@ -2,9 +2,10 @@ if(window.innerWidth<800){
 	alert("Sorry, the game is only supported for PCs and laptops :(");
 }
 
-function playSound(file){
-	var cAudio = new Audio("https://fathycoins.000webhostapp.com/music/" + file);
-	cAudio.play();
+function playSound(file, silent){
+  var cAudio = new Audio("https://fathycoins.000webhostapp.com/music/" + file);
+  if(silent) cAudio.muted = true;
+  cAudio.play();
 }
 
 class Clock{

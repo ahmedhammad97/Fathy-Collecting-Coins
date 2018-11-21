@@ -8,5 +8,8 @@ document.addEventListener("keypress", event =>{
     pause=false;
     specialKey = "Bla";
     if(!run){run=true; runGame(GAME_LEVELS,DOMDisplay);}
+    playSound("coin.mp3", true);
+    playSound("win.mp3", true);
+    playSound("lose.mp3", true);
   }
 });
